@@ -1,38 +1,106 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+.container{
+  background-color: black;
+  
+}
+
+.con{
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: center;
+  font-weight: bold;
+}
+.head{
+  font-family: 'Orbitron', sans-serif;
+  color: white;
+  padding-top: 1rem;
+  margin-bottom: 50px;
+  font-size: 60px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.stack {
+  display: grid;
+  grid-template-columns: 1fr;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.stack span {
+  font-weight: bold;
+  grid-row-start: 1;
+  grid-column-start: 1;
+  --stack-height: calc(100% / var(--stacks) - 1px);
+  --inverse-index: calc(calc(var(--stacks) - 1) - var(--index));
+  --clip-top: calc(var(--stack-height) * var(--index));
+  --clip-bottom: calc(var(--stack-height) * var(--inverse-index));
+  clip-path: inset(var(--clip-top) 0 var(--clip-bottom) 0);
+  animation: stack 340ms cubic-bezier(.46,.29,0,1.24) 1 backwards calc(var(--index) * 120ms), glitch 2s ease infinite 2s alternate-reverse;
+}
+
+.stack span:nth-child(odd) { --glitch-translate: 8px; }
+.stack span:nth-child(even) { --glitch-translate: -8px; }
+
+@keyframes stack {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%);
+    text-shadow: -2px 3px 0 red, 2px -3px 0 blue;
+  };
+  60% {
+    opacity: 0.5;
+    transform: translateX(50%);
+  }
+  80% {
+    transform: none;
+    opacity: 1;
+    text-shadow: 2px -3px 0 red, -2px 3px 0 blue;
+  }
+  100% {
+    text-shadow: none;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+@keyframes glitch {
+  0% {
+    text-shadow: -2px 3px 0 red, 2px -3px 0 blue;
+    transform: translate(var(--glitch-translate));
+  }
+  2% {
+    text-shadow: 2px -3px 0 red, -2px 3px 0 blue;
+  }
+  4%, 100% {  text-shadow: none; transform: none; }
 }
 
-.App-link {
-  color: #61dafb;
+.search{
+  background-color: white;
+  width: 800px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.searchdiv{
+  width: 800px;
+  margin-left: 24%;
+}
+
+
+.card{
+  width: 100%;
+}
+
+.card:hover{
+  color: rgba(255, 255, 255, 1);
+  box-shadow: 20px 20px 50px 15px rgba(145, 92, 182, .4);
+}
+
+.cardcon{
+  background-color: black;
+  color:white;
+  height: 200px;
+}
+
+.carddiv{
+  margin-inline:4%;
+  margin-top: 5%;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 50px;
 }
